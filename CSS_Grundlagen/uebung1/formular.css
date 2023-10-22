@@ -57,8 +57,8 @@ legend {
 
 
 /* TODO: text inputs and submit button */
-input:hover, textarea:hover, button:hover {
-	cursor: grab;
+input[type=text], button[type=submit], textarea {
+	cursor: pointer;
 }
 
 

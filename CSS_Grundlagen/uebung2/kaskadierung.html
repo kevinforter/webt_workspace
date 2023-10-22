@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Dies ist ein Beispiel, wie ein möglicher Test aussehen kann
+     und beinhaltet nicht alle Fälle. Z.B. haben wir hier keine
+     Properties mit !important markiert.-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Kaskade</title>
+    <style>
+        h1           { font-size: 200px;}
+
+        h1           { color: lightblue;   }
+        #css         { color: blue;        }
+        h1.grp1      { color: darkorange;  }
+        h1.grp1.grp2 { color: green;       }
+        body div h1  { color: red;         }
+        div h1       { color: crimson;     }
+        body h1      { color: lightgreen;  }
+        h1           { color: greenyellow; }
+        h1           { color: blueviolet;  }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 id="css" class="grp1 grp2">CSS</h1>
+        <!-- <h1 id="css" inline: style="color: blue" class="grp1 grp2">CSS</h1>  -->
+    </div>
+</body>
+
+</html>
