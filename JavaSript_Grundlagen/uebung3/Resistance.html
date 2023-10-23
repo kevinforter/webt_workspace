@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+	<meta charset="utf8"/>
+	<title>Übung 3: Gesamtwiderstandsberechnung</title>
+	<script>
+		function calculateResistance(r1, r2, wiring) {
+			// TODO: calculate resistance depending on the wiring
+			let res;
+			if (wiring == 'serial') {
+				res = r1 + r2;
+			} else if (wiring == "parallel") {
+				res = r1 * r2 / (r1 + r2);
+			}
+
+			// TODO: return result
+			return res;
+		}
+	</script>
+</head>
+
+<body>
+	<p>Die Ausgabe erfolgt im Console-Log: F12</p>
+	<script>
+	// TODO: call calculateResistance with own example values
+	let r1 = 100;
+	let r2 = 50;
+	let wiring = 'serial';
+	let result = calculateResistance(r1, r2, wiring);
+
+	// TODO: output result using console.log
+	console.log(result);
+	</script>
+</body>
+
+</html>
