@@ -4,17 +4,18 @@
 <head>
     <title>Übung 2: Events</title>
     <meta charset="utf8">
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body onpageshow="onPagesShow()">
     <header>
         <h1>Events-Übung</h1>
     </header>
     <section>
         <p>Bitte geben Sie Ihre Mitteilung ein:</p>
-        <label for="notice">Mitteilung:</label>
+        <label for="notice" onmousemove="onMouseMove()">Mitteilung:</label>
         <input id="notice">
-        <button>Abschicken</button>
+        <button onclick="onClick()">Abschicken</button>
     </section>
 </body>
 
