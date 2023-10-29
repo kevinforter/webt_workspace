@@ -31,6 +31,9 @@ function validateR1() {
     if (!r1.checkValidity()) {
         errorR1.innerText = r1.validationMessage;
     }
+    if (r1.value < 0) {
+        errorR1.innerText = "Wiederstand darf nicht minus sein"
+    }
 }
 
 function validateR2() {
@@ -39,12 +42,16 @@ function validateR2() {
     if (!r2.checkValidity()) {
         errorR2.innerText = r2.validationMessage;
     }
+
+    if (r2.value < 0) {
+        errorR2.innerText = "Wiederstand darf nicht minus sein"
+    }
 }
 
 function validateWiring() {
     let wiring = document.querySelector('[name="wiring"]');
     let errorWiring = document.getElementById("errorWiring");
-    if (!r1.checkValidity()) {
+    if (!wiring.checkValidity()) {
         errorWiring.innerText = wiring.validationMessage;
     }
 }
