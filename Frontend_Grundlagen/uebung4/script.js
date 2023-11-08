@@ -5,6 +5,7 @@ function showRandomNumber(min, max) {
     let randomNr = document.getElementById("zufallszahl");
     randomNr.innerText = x.toFixed(0);
 
+    randomNr.classList.remove('green')
     if (x < 50) {
         randomNr.classList.add('green');
     }
