@@ -1,12 +1,29 @@
-function zeigePosition(position) {
-    // TODO: Zeigen Sie die Position in den entsprechenden Feldern
+function show() {
+    // TODO: Übergeben Sie die Funktionen zeigePosition und zeigeFehler als Parameter
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+}
 
+function showPosition(position) {
+    // TODO: Zeigen Sie die Position in den entsprechenden Feldern
+    document.getElementById("latitude").innerHTML =
+        " " + position.coords.latitude;
+
+    document.getElementById("longitude").innerHTML =
+        " " + position.coords.longitude;
 
     // TODO: Passen Sie den Link zu Google Maps an
 
-}
+        const link = document.getElementById("maps");
+        link.setAttribute(
+            "href",
+            "https://www.google.ch/maps/@"
+            + position.coords.latitude + ","
+            + position.coords.longitude
+            + ",20.00z?entry=ttu")
 
-function zeigeFehler(error) {
+        return false
+}
+function showError(error) {
     let text;
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -24,7 +41,3 @@ function zeigeFehler(error) {
     document.getElementById("latitude").innerHTML = text;
 }
 
-function show() {
-    // TODO: Übergeben Sie die Funktionen zeigePosition und zeigeFehler als Parameter
-    navigator.geolocation.getCurrentPosition();
-}
