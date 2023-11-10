@@ -16,10 +16,10 @@ function showPosition(position) {
         const link = document.getElementById("maps");
         link.setAttribute(
             "href",
-            "https://www.google.ch/maps/@"
+            " https://www.google.com/maps/search/?api=1&query="
             + position.coords.latitude + ","
             + position.coords.longitude
-            + ",20.00z?entry=ttu")
+            )
 
         return false
 }
