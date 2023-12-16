@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Übung 4: Ressourcen-API für Attraktionen</title>
+</head>
+
+<body onload="loadAttractions()">
+    <h1>Übung 4: Ressourcen-API für Attraktionen</h1>    
+    
+    <label>Attraktion:</label>
+    <select id="list" oninput="loadAttractionInfo()">
+    </select>
+
+    <h3>Kurzinfos</h3>
+    <p id="info"></p>            
+
+    <h3>Bild</h3>
+    <img id="bild" src=""/>
+
+    <script>
+    function loadAttractions() {
+        xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            let attractions = JSON.parse(xhr.responseText);
+
+            // Optionen für das Select-Element zusammenstellen
+            let options = "";
+            for(let i = 0; i < attractions.length; ++i) {
+                options += '<option value="' + attractions[i] + '">' + attractions[i] + '</option>';
+            }
+
+            let list = document.getElementById("list");
+            list.innerHTML = options;
+            
+            // lade erste Attraktion
+            loadAttractionInfo();
+        }
+        xhr.open("GET", "ajax.php?action=list", true);
+        xhr.send();
+    }
+
+    function loadAttractionInfo() {
+        xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            let attractionInfo = JSON.parse(xhr.responseText);
+
+            let info = document.getElementById("info");
+            info.innerHTML = attractionInfo.text;
+            let bild = document.getElementById("bild");
+            bild.src = attractionInfo.bild;
+        }
+        let list = document.getElementById("list");
+        xhr.open("GET", "ajax.php?action=info" + "&attraktion=" + list.value, true);
+        xhr.send();
+    }
+    </script>
+
+</body>
+</html>

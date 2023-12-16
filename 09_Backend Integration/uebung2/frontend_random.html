@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Übung 2: Zufallszahl: Integration in Backend</title>
+    <meta charset="utf8">
+    <style>
+        .red { color:red; }
+        .green { color:green; }
+    </style>
+
+    <script>    
+    function parseJsonHelper(text) {
+        try {
+            return JSON.parse(text);
+        } catch (e) {
+            return null;
+        }
+    }
+    
+    function showRandomNumber(min, max) {
+        let xhr = new XMLHttpRequest();
+        xhr.onerror = function() { alert('application error: cannot send request'); }
+        xhr.timeout = function() { alert('application error: timeout'); }
+        xhr.onload = function() {
+            let response = parseJsonHelper(xhr.responseText);
+            if (xhr.status == 200 && validate(response)) {
+                update(response);
+            } else {
+                alert('application error: cannot validate backend response');
+            }
+        }
+
+        // TODO: (1) send XmlhttpRequest
+        xhr.open("GET", "backend_random.php", true);
+        xhr.send();
+    }
+
+    function update(response) {
+        // TODO: (2) update frontend
+        let random = document.getElementById('random');
+        random.innerText = response.random;
+
+        if (response.color == 'green') {
+            random.classList.remove('red');
+            random.classList.add('green');
+        } else {
+            random.classList.remove('green');
+            random.classList.add('red');
+        }
+    }
+
+    function validate(response) {
+        // TODO: (3) validate response
+        return response != null
+            && Object.hasOwn(response, 'random')
+            && !Number.isNaN(Number.parseFloat(response.random))
+            && Object.hasOwn(response, 'color')  && response.color != '';
+    }
+    </script>
+</head>
+
+<body>
+    <p id="random">bisher noch keine Zufallszahl vorliegend.</p>
+    <button onclick="showRandomNumber(1,100)">Berechne Zufallszahl</button>
+</body>
+
+</html>

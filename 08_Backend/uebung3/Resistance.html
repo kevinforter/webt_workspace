@@ -7,19 +7,29 @@
     function callPhpScript(r1, r2, wiring) {
         const url = `calculate.php?r1=${r1}&r2=${r2}&wiring=${wiring}`;
 
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Handle your JSON data here
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation: ', error);
-            });
+        let xhr = new XMLHttpRequest();
+
+        // TODO: neuer HTTP-Request nach GET-Methode mit
+        //       URL zu hello.json (relative URLs gehen auch) und
+        //       als asynchroner Request (dritter Parameter auf true)
+        xhr.open("GET", url, true);
+
+        // TODO: Aktion beim erfolgreichem Request (onload)
+        //       1. responseText (JSON) in JavaScript-Objekt einlesen
+        //       2. message aus dem JavaScript-Objekte auslesen und
+        //       3. in das Element mit ID "message" einsetzen (innerHTML).
+        xhr.onload = function() {
+            let obj = JSON.parse(xhr.responseText);
+
+            return obj.message;
+        }
+
+        // Fehlerbehandlung (onerror / ontimeout): jeweils alert() mit entsprechender Info
+        xhr.onerror   = function() { alert("Fehler beim Abfragen der Mitteilung"); }
+        xhr.ontimeout = function() { alert("Zeitüberschreitung beim Abfragen der Mitteilung"); }
+
+        // TODO: Request absenden
+        xhr.send();
     }
 </script>
 <body>
