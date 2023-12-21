@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weight Validation</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+
+<main id="main">
+    <section>
+        <div>
+            <form class="add-form">
+                <fieldset>
+                    <label for="weight">
+                        <h2>Weight</h2>
+                    </label>
+                    <input placeholder="Enter your weight" v-model="weight" @blur="touchField" @input="validateWeight"
+                           id="weight" type="text">
+                    <p v-if="errorMessage">
+                        {{ errorMessage }}
+                    </p>
+                </fieldset>
+                <fieldset>
+                    <button v-bind:disabled="errorMessage || weight == ''" type="button">SEND</button>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                weight: '',
+                touched: false,
+                errorMessage: ''
+            }
+        },
+        methods: {
+            touchField() {
+                this.touched = true;
+            },
+            validateWeight() {
+                if (this.weight === '') {
+                    this.errorMessage = '';
+                } else if (!isNaN(this.weight) && this.weight > 0) {
+                    this.errorMessage = '';
+                } else {
+                    this.errorMessage = 'Invalid weight! Must be a number greater than 0.';
+                }
+            }
+        }
+    }).mount('#main');
+</script>
+
+</body>
+</html>

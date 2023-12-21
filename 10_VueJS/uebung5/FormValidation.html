@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FormValidation</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+
+<main id="main">
+    <form @submit="onSubmit" class="add-form">
+        <label for="email">
+            <h2>E-Mail</h2>
+        </label>
+        <input placeholder="Enter your email address" v-model="email" id="email" required type="email">
+        <p v-if="errorMessage">
+            {{ errorMessage }}
+        </p>
+        <input type="submit" value="Submit" class="btn-btn-block"/>
+    </form>
+</main>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                email: '',
+            }
+        },
+        methods: {
+            onSubmit(event) {
+                event.preventDefault()
+                console.log(event)
+            },
+            validateEmail(email) {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                    this.errorMessage = ''
+                } else {
+                    this.errorMessage = 'Email invalid!'
+                }
+            }
+        },
+        watch: {
+            email(value){
+                this.email = value;
+                this.validateEmail(value);
+            }
+        },
+    }).mount('#main');
+</script>
+
+</body>
+</html>
