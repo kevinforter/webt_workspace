@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home - z-calculator</title>
+    <!--all meta tags-->
+    <meta name="description" content="Berechnet den Z-Wert für die Skibindung basierenden auf der DIN ISO 11088">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--removing favicon error-->
+    <link rel="shortcut icon" href="#">
+    <!--all stylesheets-->
+    <!--<link rel="stylesheet" href="/css/index.css" type="text/css">-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <!--all scripts-->
+    <script src="/js/index.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>-->
+</head>
+<body>
+
+<nav class="w3-bar w3-transparent navbar">
+    <a href="#eingabebereich" class="w3-bar-item w3-button w3-mobile">INPUT</a>
+    <a href="#information" class="w3-bar-item w3-button w3-mobile">INFO</a>
+    <a href="#ausgabe" class="w3-bar-item w3-button w3-mobile">OUTPUT</a>
+</nav>
+
+<main class="w3-container w3-mobile" id="main">
+    <section class="w3-container content-section" id="eingabebereich">
+        <!--<canvas id="canvas"></canvas>-->
+        <div class="container" id="calculator">
+            <form action="var/index.php" class="form" id="calculator-form">
+                <fieldset class="w3-container invisible-fieldset" id="fieldset-personal">
+                    <legend>Personal</legend>
+                    <div class="w3-container text-box-container">
+
+                        <div class="input-box">
+                            <input class="w3-input input-box-input" id="weight" type="number" name="personal-information"
+                                   min="1" size="10" required="" placeholder="Gewicht (KG)">
+                            <label class="input-box-label" for="weight"></label>
+                            <p id="errorWeight" class=".error"></p>
+                        </div>
+
+                        <div class="input-box">
+                            <input class="w3-input input-box-input" id="soleLength" type="number" name="personal-information"
+                                   min="1" size="10" required="" placeholder="Sohlenlänge (mm)">
+                            <label class="input-box-label" for="soleLength"></label>
+                            <p id="errorSoleLength" class=".error"></p>
+                        </div>
+
+                        <div class="input-box">
+                            <input class="w3-input input-box-input" id="age" type="number" name="personal-information"
+                                   min="1" size="10" required="" placeholder="Alter">
+                            <label class="input-box-label" for="age"></label>
+                            <p id="errorAge" class=".error"></p>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <fieldset class="w3-container invisible-fieldset" id="fieldset-ability">
+                    <legend>Ability</legend>
+                    <div class="w3-container radio-button-container">
+
+                        <div class="radio-button">
+                            <label class="radio-button-label" for="beginner">Beginner</label>
+                            <input class="w3-input radio-button-input" id="beginner" type="radio" name="ability"
+                                   value="beginner" required="">
+                        </div>
+
+                        <div class="radio-button">
+                            <label class="radio-button-label" for="intermediate">Intermediate</label>
+                            <input class="w3-input radio-button-input" id="intermediate" type="radio" name="ability"
+                                   value="intermediate" required="">
+                        </div>
+
+                        <div class="radio-button">
+                            <label class="radio-button-label" for="advanced">Advanced</label>
+                            <input class="w3-input radio-button-input" id="advanced" type="radio" name="ability"
+                                   value="advanced" required="">
+                        </div>
+
+                        <p id="errorAbility" class=".error"></p>
+                    </div>
+                </fieldset>
+
+                <fieldset class="w3-container invisible-fieldset" id="fieldset-button">
+                    <legend>Berechnen</legend>
+                    <button class="w3-button" type="button" onclick="validateAndCalculate()">Berechne Gesamtwiderstand
+                    </button>
+                </fieldset>
+
+            </form>
+        </div>
+
+        <div class="container" id="calculator-text">
+            <article>
+                <p>
+                    The Z-value of a ski binding, often referred to as the "DIN setting," is a critical measurement for
+                    skiers, as it determines the force level at which the binding will release the boot.
+                    This setting is crucial for both safety and performance.
+                    <br>
+                    So please provide us with the correct information in the form you see on the left side
+                </p>
+                <br>
+                <p>Berechneter Z-Wert: <span id="output"></span></p>
+            </article>
+        </div>
+    </section>
+
+    <section class="w3-container content-section" id="information">
+
+    </section>
+
+    <section class="w3-container content-section" id="ausgabe">
+
+    </section>
+</main>
+<footer>
+    <div class="w3-container container" id="footer">
+        <p>Copyright ©&nbsp; z-calculator 2023</p>
+    </div>
+</footer>
+
+</body>
+</html>
