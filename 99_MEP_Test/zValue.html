@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home - z-calculator</title>
+  <!--all meta tags-->
+  <meta name="description" content="Berechnet den Z-Wert für die Skibindung basierenden auf der DIN ISO 11088">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--removing favicon error-->
+  <link rel="shortcut icon" href="#">
+  <!--all stylesheets-->
+  <!--<link rel="stylesheet" href="/css/index.css" type="text/css">-->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+  <!--all scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <script src="frontendValidation.js"></script>
+  <script src="calculator.js"></script>
+</head>
+<body>
+
+<nav class="w3-bar w3-transparent navbar">
+  <a href="#eingabebereich" class="w3-bar-item w3-button w3-mobile">INPUT</a>
+  <a href="#information" class="w3-bar-item w3-button w3-mobile">INFO</a>
+  <a href="#ausgabe" class="w3-bar-item w3-button w3-mobile">OUTPUT</a>
+</nav>
+
+<main id="main">
+  <section class="w3-row content-section" id="eingabebereich">
+    <!--<canvas id="canvas"></canvas>-->
+    <div class="w3-col m6" id="calculator">
+      <form @submit="onSubmit" class="w3-container" id="calculator-form">
+        <fieldset class="w3-container invisible-fieldset" id="fieldset-personal">
+          <legend>Personal</legend>
+          <div class="text-box-container">
+
+            <div class="w3-group input-box">
+              <label class="w3-label input-box-label" for="weight">Weight:</label>
+              <input v-model="weight" @blur="touchField" @input="validateWeight" class="w3-input input-box-input" id="weight" type="number" name="personal-information"
+                     min="1" size="10" required="" placeholder="Gewicht (KG)">
+              <p v-if="errorWeight" id="errorWeight" class="error">{{ errorWeight }}</p>
+            </div>
+
+            <div class="w3-group input-box">
+              <label class="w3-label input-box-label" for="soleLength">Solelength:</label>
+              <input v-model="soleLength" @blur="touchField" @input="validateSoleLength" class="w3-input input-box-input" id="soleLength" type="number" name="personal-information"
+                     min="1" size="10" required="" placeholder="Sohlenlänge (mm)">
+              <p v-if="errorSoleLength" id="errorSoleLength" class="error">{{ errorSoleLength }}</p>
+            </div>
+
+            <div class="w3-group input-box">
+              <label class="w3-label input-box-label" for="age">Age:</label>
+              <input v-model="age" @blur="touchField" @input="validateAge" class="w3-input input-box-input" id="age" type="number" name="personal-information"
+                     min="1" size="10" required="" placeholder="Alter">
+              <p v-if="errorAge" id="errorAge" class="error">{{ errorAge }}</p>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <fieldset class="w3-container invisible-fieldset" id="fieldset-ability">
+          <legend>Ability</legend>
+          <div class="radio-button-container">
+
+            <div class="w3-group radio-button">
+              <label class="w3-label radio-button-label" for="beginner">Beginner</label>
+              <input v-model="ability" @blur="touchField" @input="validateAbility" class="w3-input radio-button-input" id="beginner" type="radio" name="ability"
+                     value="beginner" required="">
+            </div>
+
+            <div class="w3-group radio-button">
+              <label class="w3-label radio-button-label" for="intermediate">Intermediate</label>
+              <input v-model="ability" @blur="touchField" @input="validateAbility" class="w3-input radio-button-input" id="intermediate" type="radio" name="ability"
+                     value="intermediate" required="">
+            </div>
+
+            <div class="w3-group radio-button">
+              <label class="w3-label radio-button-label" for="advanced">Advanced</label>
+              <input v-model="ability" @blur="touchField" @input="validateAbility" class="w3-input radio-button-input" id="advanced" type="radio" name="ability"
+                     value="advanced" required="">
+            </div>
+
+            <p v-if="errorAbility"  id="errorAbility" class="error">{{ errorAbility }}</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="w3-container invisible-fieldset" id="fieldset-button">
+          <legend>Berechnen</legend>
+          <button v-bind:disabled="errorWeight || errorAge || errorSoleLength || errorAbility || weight == '' || soleLength == '' || age == '' || ability == ''" class="w3-button" type="submit" value="Submit" onclick="validateAndCalculate()">Berechne Gesamtwiderstand
+          </button>
+        </fieldset>
+
+      </form>
+    </div>
+
+    <div class="w3-col m6" id="calculator-text">
+      <article class="w3-container">
+        <p>
+          The Z-value of a ski binding, often referred to as the "DIN setting," is a critical measurement for
+          skiers, as it determines the force level at which the binding will release the boot.
+          This setting is crucial for both safety and performance.
+          <br>
+          So please provide us with the correct information in the form you see on the left side
+        </p>
+        <br>
+        <p>Berechneter Z-Wert: <span id="output"></span></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="w3-row content-section" id="information">
+
+  </section>
+
+  <section class="w3-row content-section" id="ausgabe">
+
+  </section>
+</main>
+<footer class="w3-container w3-mobile">
+  <div class="w3-container" id="footer">
+    <p>Copyright ©&nbsp; z-calculator 2023</p>
+  </div>
+</footer>
+
+</body>
+</html>
