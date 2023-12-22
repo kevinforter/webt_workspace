@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
   <!--all scripts-->
   <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-  <script src="/js/frontendValidation.js"></script>
-  <script src="/js/calculator.js"></script>
+  <script src="frontendValidation.js"></script>
+  <script src="calculator.js"></script>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
   <section class="w3-row content-section" id="eingabebereich">
     <!--<canvas id="canvas"></canvas>-->
     <div class="w3-col m6" id="calculator">
-      <form class="w3-container" id="calculator-form">
+      <form @submit="onSubmit" class="w3-container" id="calculator-form">
         <fieldset class="w3-container invisible-fieldset" id="fieldset-personal">
           <legend>Personal</legend>
           <div class="text-box-container">
@@ -86,7 +86,8 @@
 
         <fieldset class="w3-container invisible-fieldset" id="fieldset-button">
           <legend>Berechnen</legend>
-          <button class="w3-button" type="button" onclick="calculate()" v-bind:disabled="isButtonDisabled">Berechne Gesamtwiderstand</button>
+          <button v-bind:disabled="errorWeight || errorAge || errorSoleLength || errorAbility || weight == '' || soleLength == '' || age == '' || ability == ''" class="w3-button" type="submit" value="Submit" onclick="validateAndCalculate()">Berechne Gesamtwiderstand
+          </button>
         </fieldset>
 
       </form>

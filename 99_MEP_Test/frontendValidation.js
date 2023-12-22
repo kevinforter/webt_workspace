@@ -13,40 +13,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 errorAbility: ''
             }
         },
+        computed: {
+            isButtonDisabled() {
+                return this.errorWeight || this.errorAge || this.errorSoleLength || this.errorAbility || this.weight == '' || this.soleLength == '' || this.age == '' || this.ability == '';
+            }
+        },
         methods: {
-            onSubmit(event) {
-                event.preventDefault()
-                console.log(event)
-            },
             touchField() {
                 this.touched = true;
             },
-            validateWeight() {
-                if (this.weight === '') {
-                    this.errorWeight = '';
-                } else if (!isNaN(this.weight) && this.weight > 0) {
-                    this.errorWeight = '';
+            validateNumber(value, errorField, errorMessage) {
+                if (value === '') {
+                    this[errorField] = '';
+                } else if (!isNaN(value) && value > 0) {
+                    this[errorField] = '';
                 } else {
-                    this.errorWeight = 'Invalid weight! Must be a number greater than 0.';
+                    this[errorField] = errorMessage;
                 }
+            },
+            validateWeight() {
+                this.validateNumber(this.weight, 'errorWeight', 'Invalid weight! Must be a number greater than 0.');
             },
             validateSoleLength() {
-                if (this.soleLength === '') {
-                    this.errorSoleLength = '';
-                } else if (!isNaN(this.soleLength) && this.soleLength > 0) {
-                    this.errorSoleLength = '';
-                } else {
-                    this.errorSoleLength = 'Invalid sole length! Must be a number greater than 0.';
-                }
+                this.validateNumber(this.soleLength, 'errorSoleLength', 'Invalid sole length! Must be a number greater than 0.');
             },
             validateAge() {
-                if (this.age === '') {
-                    this.errorAge = '';
-                } else if (!isNaN(this.age) && this.age > 0) {
-                    this.errorAge = '';
-                } else {
-                    this.errorAge = 'Invalid age! Must be a number greater than 0.';
-                }
+                this.validateNumber(this.age, 'errorAge', 'Invalid age! Must be a number greater than 0.');
             },
             validateAbility() {
                 if (this.ability != null) {
@@ -55,6 +47,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     this.errorAbility = 'Ability must be selected!';
                 }
             },
+        },
+        mounted() {
+            this.validateWeight();
+            this.validateSoleLength();
+            this.validateAge();
+            this.validateAbility();
         }
     }).mount('#main');
 });
