@@ -1,0 +1,80 @@
+body {
+    background: rgba(0, 0, 0);
+}
+
+footer {
+    background: rgba(0, 0, 0);
+    text-align: center;
+}
+
+* {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Page style */
+
+#eingabebereich {
+    background-size: cover;
+    background-position: center;
+}
+
+/* canvas Style  */
+
+#canvas {
+    position: absolute;
+    z-index: 0;
+}
+
+/* Navbar */
+
+.navbar {
+    z-index: 6;
+}
+
+/* fieldset style */
+
+.invisible-fieldset {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.invisible-fieldset legend {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .w3-display-container {
+        flex-direction: column;
+    }
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 770px) {
+    #calculator-text {
+        font-size: 150%;
+    }
+    .navbar {
+        background-color: transparent;
+        position: fixed;
+    }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 769px) {
+    #calculator-text {
+        font-size: 100%;
+    }
+    .navbar {
+        background-color: black;
+        position: static;
+    }
+}
