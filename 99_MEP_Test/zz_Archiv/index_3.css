@@ -1,0 +1,218 @@
+body {
+    background: rgba(0, 0, 0);
+}
+
+* {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+/* Page style */
+
+#eingabebereich {
+    background-image: url("/img/mountain_dark.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#article {
+    text-align: justify;
+}
+
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Responsive layout */
+
+@media screen and (max-width: 600px) {
+    .centered-content {
+        flex-direction: column;
+    }
+    .navbar a {display: none;}
+    .navbar .dropdown-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    #article {
+        margin: 0 1em 0 1em;
+    }
+    #calculator, #calculator-text {
+        width:     75%;
+        margin-top: 2.5em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #calculator-text {
+        font-size: 100%;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    #calculator-text {
+        font-size: 150%;
+        width:     500px;
+        height:    50%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .navbar {
+        background-color: transparent;
+        position: fixed;
+    }
+    #calculator {
+        width:     500px;
+        height:    50%;
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+}
+
+/* Style for the dropdown button */
+
+.navbar .dropdown-btn {
+    display: none;
+}
+
+/* fieldset style */
+
+.invisible-fieldset {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.invisible-fieldset legend {
+    display: none;
+}
+
+/* from style */
+
+#calculator-form {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    transition: .4s ease-in-out;
+}
+
+#calculator-form {
+    flex-direction: column;
+    width: 100%;
+    padding: 0.4em 2em;
+    gap: 10px;
+}
+
+.form:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
+}
+
+/* input style */
+
+.input-box, #send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    margin: 1em 0 1em 0;
+}
+
+.input-box-input {
+    background: none;
+    border: none !important;
+    outline: none !important;
+    width: 100%;
+    color: #d3d3d3;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* radio button style */
+
+.radio-button-label {
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    padding: 14px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.radio-button-label:hover,
+.radio-button-label:focus-within,
+.radio-button-label:active {
+    background: hsla(0, 0%, 80%, .14);
+}
+
+.radio-button-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+}
+
+.radio-button-design {
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+    position: relative;
+}
+
+
+.radio-button-design::before {
+    content: '';
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: hsl(0, 0%, 90%);
+    transform: scale(1.1);
+    transition: .3s;
+}
+
+.radio-button-input:checked+.radio-button-design::before {
+    transform: scale(0);
+}
+
+.radio-button-content {
+    color: hsl(0, 0%, 60%);
+    margin-left: 14px;
+    letter-spacing: 3px;
+    font-size: 100%;
+    font-weight: 900;
+    transition: .3s;
+}
+
+.radio-button-input:checked~.radio-button-content {
+    color: hsl(0, 0%, 40%);
+}

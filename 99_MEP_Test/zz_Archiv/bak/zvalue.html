@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+  <title>Home - z-calculator</title>
+  <meta name="description" content="Berechnet den Z-Wert für die Skibindung basierenden auf der DIN ISO 11088">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css" type="text/css">
+  <script src="../../../../../Users/kevinforter/Library/CloudStorage/OneDrive-HochschuleLuzern/HSLU/2023/HS23/WEBT/webt_workspace/99_MEP_Test/zz_Archiv/index.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="calculator">
+
+  <h2>Ski Binding Z-Wert Calculator</h2>
+
+  <fieldset>
+    <legend><strong>Personen Daten</strong></legend>
+
+    <label for="weight">Gewicht (kg):</label>
+    <br>
+    <input type="number" id="weight" min="1" max='200' size="10" required>
+    <p id="errorWeight" class=".error"></p>
+
+    <label for="soleLength">Sohlenlänge (mm):</label>
+    <br>
+    <input type="number" id="soleLength" min="1" max="400" size="10" required>
+    <p id="errorSoleLength" class=".error"></p>
+
+  </fieldset>
+  <br>
+  <fieldset>
+    <legend><strong>Ability</strong></legend>
+    <br>
+    <div class="radio-button-container">
+      <div class="radio-button">
+        <input type="radio" class="radio-button__input" id=1 name="ability" required>
+        <label class="radio-button__label" for=1>
+          <span class="radio-button__custom"></span>
+          Beginner
+        </label>
+      </div>
+      <div class="radio-button">
+        <input type="radio" class="radio-button__input" id=2 name="ability" required>
+        <label class="radio-button__label" for=2>
+          <span class="radio-button__custom"></span>
+          Intermediate
+        </label>
+      </div>
+      <div class="radio-button">
+        <input type="radio" class="radio-button__input" id=3 name="ability" required>
+        <label class="radio-button__label" for=3>
+          <span class="radio-button__custom"></span>
+          Advanced
+        </label>
+      </div>
+    </div>
+    <p id="errorAbility" class=".error"></p>
+
+  </fieldset>
+  <br>
+  <fieldset>
+
+    <legend><strong>Berechnen</strong></legend>
+    <button onclick="validateAndCalculate()">Berechnen</button>
+
+  </fieldset>
+  <br>
+  <fieldset>
+
+    <legend><strong>Berechnung</strong></legend>
+    <p>Z-Wert: <span id="output"></span></p>
+
+  </fieldset>
+  <br>
+</div>
+<footer>
+  <section></section>
+  <div class="container text-center"><p>Copyright ©&nbsp;z-calculator 2023</p></div>
+</footer>
+</body>
+</html>

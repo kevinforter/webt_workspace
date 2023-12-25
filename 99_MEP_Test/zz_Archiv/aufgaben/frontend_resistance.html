@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8">
+	<title>Übung 3: Gesamtwiderstandsberechnung - GET zu POST</title>
+	<script>
+		function parseJsonHelper(text) {
+			try {
+				return JSON.parse(text);
+			} catch (e) {
+				return null;
+			}
+		}
+
+		function calculate() {
+			// retrive information of form (r1, r2 und wiring)
+			let r1 = document.getElementById('r1').value;
+			let r2 = document.getElementById('r2').value;
+
+			let serial = document.getElementById('serial');
+			let parallel = document.getElementById('parallel');
+			let wiring;
+			if (serial.checked) {
+				wiring = serial.value;
+			} else {
+				wiring = parallel.value;
+			}
+
+			let xhr = new XMLHttpRequest();
+			xhr.onerror = function() { alert('application error: cannot send request'); }
+			xhr.timeout = function() { alert('application error: timeout'); }
+			xhr.onload = function() {
+				let response = parseJsonHelper(xhr.responseText);
+				if (xhr.status == 200 && validate(response)) {
+					update(response);
+				} else {
+					alert('application error: cannot validate backend reply');
+				}
+			}
+
+			// DONE: Change to POST request
+			xhr.open('POST', 'backend_resistance.php', true);
+
+			// DONE: Send data as JSON document instead of query parameters
+			let request = {r1 : r1, r2 : r2, wiring: wiring};
+			xhr.send(JSON.stringify(request));
+		}
+
+		function validate(response) {
+			return response != null
+					&& Object.hasOwn(response, 'resistance')
+					&& !Number.isNaN(Number.parseFloat(response.resistance));
+		}
+
+		function update(response) {
+			// output the total resistance in span with id output
+			let output = document.getElementById('output');
+			output.innerText = Number.parseFloat(response.resistance).toFixed(2) + ' Ohm';
+		}
+
+		// implement validation functions for R1, R2, Wiring
+		function validateInputElement(inputElementId, errorElementId) {
+			let inputElement = document.getElementById(inputElementId);
+			let errorElement = document.getElementById(errorElementId);
+			if (!inputElement.checkValidity()) {
+				errorElement.innerText = inputElement.validationMessage;
+			}
+		}
+
+		function validatePeerDepdenciesOfInputField() {
+			let r1 = document.getElementById('r1');
+			let r2 = document.getElementById('r2');
+			let r1ErrorElement = document.getElementById('errorR1');
+			let r2ErrorElement = document.getElementById('errorR2');
+
+			if(r1.checkValidity() && r2.checkValidity() && r1.value == 0 && r2.value == 0) {
+				r1ErrorElement.innerText = 'R1 und R2 dürfen nicht beide 0 sein.'
+				r2ErrorElement.innerText = 'R1 und R2 dürfen nicht beide 0 sein.'
+			}
+		}
+
+		function clearValidationErrors() {
+			document.getElementById('errorR1').innerText = '';
+			document.getElementById('errorR2').innerText = '';
+			document.getElementById('errorWiring').innerText = '';
+		}
+
+		function hasValidationErrors() {
+			return document.getElementById('errorR1').innerText != ''
+					|| document.getElementById('errorR2').innerText != ''
+					|| document.getElementById('errorWiring').innerText != '';
+		}
+
+
+
+		function validateAndCalculate() {
+			clearValidationErrors();
+			// call validation functions for R1, R2, Wiring
+			validateInputElement('r1', 'errorR1');
+			validateInputElement('r2', 'errorR2');
+			validateInputElement('serial', 'errorWiring');
+			validateInputElement('parallel', 'errorWiring');
+			validatePeerDepdenciesOfInputField();
+			if (!hasValidationErrors()) {
+				calculate();
+			}
+		}
+	</script>
+</head>
+<body>
+
+<h2>Berechnung Gesamtwiderstand</h2>
+<main>
+	<fieldset>
+		<legend><strong>Widerstände</strong></legend>
+		<label for="r1">R1:</label>
+		<br>
+		<input id="r1" type="number" min="0" required>
+		<br>
+		<p id="errorR1" class=".error"></p>
+		<label for="r2">R2:</label>
+		<br>
+		<input id="r2" type="number" min="0" required>
+		<p id="errorR2" class=".error"></p>
+	</fieldset>
+	<fieldset>
+		<legend><strong>Schaltung</strong></legend>
+		<label for="serial">Seriell:</label><br>
+		<input id="serial" type="radio" name="wiring" value="serial" required>
+		<br>
+		<label for="parallel">Parallel:</label><br>
+		<input id="parallel" type="radio" name="wiring" value="parallel" required>
+		<p id="errorWiring" class=".error"></p>
+	</fieldset>
+
+	<fieldset>
+		<legend><strong>Berechnung</strong></legend>
+		<p>Gesamtwiderstand: <span id="output"></span></p>
+
+	</fieldset>
+	<fieldset>
+		<legend><strong>Berechnen</strong></legend>
+		<button type="button" onclick="validateAndCalculate()">Berechne Gesamtwiderstand</button>
+	</fieldset>
+</main>
+</body>
+
+</html>

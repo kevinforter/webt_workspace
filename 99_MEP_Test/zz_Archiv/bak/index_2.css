@@ -1,0 +1,43 @@
+/* body styling */
+
+body {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    background: rgba(22, 72, 99)
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#calculator-form {
+    background-image: url("/img/mountain.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#calculator-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#calculator {
+    width: 90%;
+    height: 100%;
+}
+
+/* canvas stuff */
+
+* {margin: 0; padding: 0;}
+
+canvas {
+    display: block;
+}
